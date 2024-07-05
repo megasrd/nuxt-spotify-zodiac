@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ZodiacSelect />
+        <ProfileInfo />
     </div>
 </template>
 <script setup>

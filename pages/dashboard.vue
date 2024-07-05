@@ -1,24 +1,15 @@
 <template>
-  <div class="my-12">
-    <div v-if="isLoaded" class="max-w-5xl mx-auto bg-slate-900 rounded-2xl py-8 px-5">
-      <img class="w-24 h-24 rounded-full mb-6 mx-auto" :src="user.images[1].url" />
-      <label class="text-center font-bold text-xl block"> {{ user.display_name }} </label>
-      <div class="grid grid-cols-3 gap-8 mt-12">
-        <div class="flex flex-wrap bg-slate-700" v-for="(item, key) in recently_played.items" :key="key">
-          <div class="w-4/12">
-            <img class="w-full" :src="item.track.album.images[2].url" />
-          </div>
-          <div class="w-8/12 py-5 px-3">
-            <h4 class="text-sm font-semibold"> {{ item.track.name }} </h4>
-            <h5 class="text-xs italic text-slate-300"> {{ item.track.album.name }} </h5>
-          </div>          
-        </div>
-      </div>
-    </div>
+  <div class="my-12">    
+    <template v-if="isLoaded">
+      <ProfileInfo :user="user" />
+    </template>
   </div>
 </template>
 
 <script setup>
+  definePageMeta({
+    layout: 'spotify'
+  });
   const spotify_store = useSpotifyStore();
 
   let isLoaded = ref(false);
@@ -45,7 +36,8 @@
       await spotify_store.getRecentlyPlayed();
 
       user = spotify_store.user_info;
-      recently_played = spotify_store.recently_played;        
+      recently_played = spotify_store.recently_played;       
+      console.log(recently_played);
 
       isLoaded = true;
     }

@@ -3,9 +3,9 @@ export default defineEventHandler(async (event) => {
 
     const body = await readBody(event);
 
-    let client_id = '12883f075a9e4c1e8711f37adda0fae2';
-    let client_secret = 'cc53472a96ec44e3ab688683937804e8';
-    let redirect_uri = 'http://localhost:3000/dashboard';
+    let client_id = process.env.CLIENT_ID; 
+    let client_secret = process.env.CLIENT_SECRET;
+    let redirect_uri = process.env.REDIRECT_URI;
 
     const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 

@@ -9,7 +9,14 @@ module.exports = {
     "./error.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'pantone-heavy': '#12251f',
+        'pantone-medium': '#005621',
+        'pantone-regular': '#00792e',
+        'pantone-light': '#009b3c'
+      }      
+    },
   },
   plugins: [],
 }

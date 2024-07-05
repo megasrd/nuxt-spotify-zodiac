@@ -2,8 +2,9 @@ import querystring from 'querystring';
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
 
-  let client_id = '12883f075a9e4c1e8711f37adda0fae2';
-  let redirect_uri = 'http://localhost:3000/dashboard';  
+  let client_id = process.env.CLIENT_ID; 
+  let redirect_uri = process.env.REDIRECT_URI;
+  
 
   const generateRandomString = length => {
       let text = '';

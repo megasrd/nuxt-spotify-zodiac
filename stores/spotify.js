@@ -2,8 +2,16 @@ export const useSpotifyStore = defineStore('spotifyStore', {
     state: () => ({
       access_token: 'access_token',
       user_info: {},
-      recently_played: {}
+      recently_played: {},
+      top_artists: {}
     }),
+    getters: {
+      headers(state) {
+        return {
+          'Authorization': `Bearer ${state.access_token}` 
+        }
+      }
+    },
     actions: {
       setAccessToken(value) {
         this.access_token = value;
@@ -25,7 +33,16 @@ export const useSpotifyStore = defineStore('spotifyStore', {
             }
         })
         this.recently_played = recently_played;
-      }      
+      },
+      async getTopArtists() {
+        const top_artists = await $fetch('/api/get-top-artists', {
+            method: 'POST',
+            body: {
+                access_token: this.access_token
+            }
+        })
+        this.top_artists = top_artists;
+      }               
     }
   })
   

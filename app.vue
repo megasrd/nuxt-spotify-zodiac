@@ -7,7 +7,7 @@
 </template>
 <style lang="scss">
     body {
-        @apply bg-slate-950 text-white;
+        @apply bg-slate-900 text-white;
     }
 </style>
 <script>
