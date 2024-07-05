@@ -20,15 +20,14 @@ export default defineEventHandler(async (event) => {
 
     const state = generateRandomString(16);
     const scope = 'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public';    
-    await navigateTo(`https://accounts.spotify.com/authorize?${querystring.stringify({
+    const url = `https://accounts.spotify.com/authorize?${querystring.stringify({
         response_type: 'code', 
         client_id: client_id,       
         scope: scope,
         redirect_uri: redirect_uri,
         state: state,         
-    })}`, {
-        external: true
-    })  
+    })}`;
+    await sendRedirect(event, url, 302);
 
 })
   

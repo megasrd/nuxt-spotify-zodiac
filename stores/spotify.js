@@ -7,39 +7,35 @@ export const useSpotifyStore = defineStore('spotifyStore', {
     }),
     getters: {
       headers(state) {
+        const token = localStorage.getItem("access_token");
         return {
-          'Authorization': `Bearer ${state.access_token}` 
+          'Authorization': `Bearer ${token}` 
         }
+      },
+      getAccessToken(state) {
+        return localStorage.getItem("access_token");
       }
     },
     actions: {
       setAccessToken(value) {
         this.access_token = value;
+        localStorage.setItem("access_token", value);
       },
       async getUser() {
-        const user_info = await $fetch('/api/get-user', {
-            method: 'POST',
-            body: {
-                access_token: this.access_token
-            }
+        const user_info = await $fetch('https://api.spotify.com/v1/me', {
+          headers: this.headers
         })
         this.user_info = user_info;
       },
       async getRecentlyPlayed() {
-        const recently_played = await $fetch('/api/get-recently-played', {
-            method: 'POST',
-            body: {
-                access_token: this.access_token
-            }
+        const recently_played = await $fetch('https://api.spotify.com/v1/me/player/recently-played', {
+          headers: this.headers
         })
         this.recently_played = recently_played;
       },
       async getTopArtists() {
-        const top_artists = await $fetch('/api/get-top-artists', {
-            method: 'POST',
-            body: {
-                access_token: this.access_token
-            }
+        const top_artists = await $fetch('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term', {
+          headers: this.headers
         })
         this.top_artists = top_artists;
       }               
