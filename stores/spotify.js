@@ -34,7 +34,7 @@ export const useSpotifyStore = defineStore('spotifyStore', {
         this.recently_played = recently_played;
       },
       async getTopArtists() {
-        const top_artists = await $fetch('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term', {
+        const top_artists = await $fetch('https://api.spotify.com/v1/me/top/artists?limit=10&time_range=short_term', {
           headers: this.headers
         })
         this.top_artists = top_artists;
