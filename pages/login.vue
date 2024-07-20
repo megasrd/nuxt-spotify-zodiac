@@ -2,12 +2,12 @@
   <div> </div>
 </template>
 
-<script setup>
+<script setup>  
 
   import querystring from 'querystring';
   
-  let client_id = process.env.CLIENT_ID || '12883f075a9e4c1e8711f37adda0fae2'; 
-  let redirect_uri = process.env.REDIRECT_URI || 'http://localhost:3000/dashboard';
+  let client_id = process.env.CLIENT_ID; 
+  let redirect_uri = process.env.REDIRECT_URI;
   
   const generateRandomString = length => {
       let text = '';
