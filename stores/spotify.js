@@ -3,7 +3,10 @@ export const useSpotifyStore = defineStore('spotifyStore', {
       access_token: 'access_token',
       user_info: {},
       recently_played: {},
-      top_artists: {}
+      top_artists: {},
+      top_artists_short: {},
+      top_tracks: {},
+      top_tracks_short: {}
     }),
     getters: {
       headers(state) {
@@ -33,12 +36,30 @@ export const useSpotifyStore = defineStore('spotifyStore', {
         })
         this.recently_played = recently_played;
       },
+      async getTopTracksShort() {
+        const top_tracks_short = await $fetch('https://api.spotify.com/v1/me/top/tracks?limit=12&time_range=short_term', {
+          headers: this.headers
+        })
+        this.top_tracks_short = top_tracks_short;
+      },
+      async getTopArtistsShort() {
+        const top_artists_short = await $fetch('https://api.spotify.com/v1/me/top/artists?limit=12&time_range=short_term', {
+          headers: this.headers
+        })
+        this.top_artists_short = top_artists_short;
+      },
       async getTopArtists() {
-        const top_artists = await $fetch('https://api.spotify.com/v1/me/top/artists?limit=10&time_range=short_term', {
+        const top_artists = await $fetch('https://api.spotify.com/v1/me/top/artists?limit=10', {
           headers: this.headers
         })
         this.top_artists = top_artists;
-      }               
+      },
+      async getTopTracks() {
+        const top_tracks = await $fetch('https://api.spotify.com/v1/me/top/tracks?limit=20', {
+          headers: this.headers
+        })
+        this.top_tracks = top_tracks;
+      }         
     }
   })
   
