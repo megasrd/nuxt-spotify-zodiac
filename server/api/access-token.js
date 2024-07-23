@@ -2,10 +2,11 @@
 export default defineEventHandler(async (event) => {
 
     const body = await readBody(event);
+    const config = useRuntimeConfig();
 
-    let client_id = process.env.CLIENT_ID; 
-    let client_secret = process.env.CLIENT_SECRET;
-    let redirect_uri = process.env.REDIRECT_URI;
+    let client_id = config.public.CLIENT_ID;; 
+    let client_secret = config.public.CLIENT_SECRET;
+    let redirect_uri = config.public.REDIRECT_URI;
 
     const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 

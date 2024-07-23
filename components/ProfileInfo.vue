@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto">
     <img class="w-36 h-36 rounded-full mx-auto mb-6 bg-slate-800" :src="user.images[1].url">
-    <h2 class="text-center font-bold text-5xl"> {{ user.display_name }} </h2>
+    <h2 class="text-center font-bold md:text-5xl text-3xl"> {{ user.display_name }} </h2>
     <div class="grid grid-cols-3 gap-4 mt-4 mx-auto max-w-sm">
         <div class="text-center">
             <label class="font-bold text-xl block mb-2"> {{ user.followers.total }} </label>

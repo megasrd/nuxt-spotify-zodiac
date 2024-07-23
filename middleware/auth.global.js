@@ -4,7 +4,11 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   if (import.meta.server) return;  
 
   //skip if the login page
-  if (from.path == '/login') return;
+  if (to.path == '/login') return;
+
+  if (to.path == '/' && window.localStorage.getItem('access_token') == null) {
+    return navigateTo('/login');
+  }
 
   const setTokenTimestamp = () => window.localStorage.setItem('spotify_token_timestamp', Date.now());
   const EXPIRATION_TIME = 3600 * 1000;
@@ -14,6 +18,21 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     setTokenTimestamp();
     window.localStorage.setItem('access_token', token);
   };    
+
+  if (window.localStorage.getItem('access_token') == null) {
+    const route = useRoute();
+    await $fetch('/api/access-token', {
+      method: 'POST',
+      lazy: false,
+      server: false,
+      body: {
+        code: route.query.code
+      }
+    }).then((res) => {
+      window.localStorage.setItem('refresh_token', res.refresh_token);
+      setLocalAccessToken(res.access_token)
+    })        
+  }     
 
   const refreshAccessToken = async () => {
     await $fetch('/api/refresh-token', {
@@ -31,20 +50,5 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     console.warn('Access token has expired, refreshing...');
     refreshAccessToken();
   }      
-
-  if (window.localStorage.getItem('access_token') == null) {
-    const route = useRoute();
-    await $fetch('/api/access-token', {
-      method: 'POST',
-      lazy: false,
-      server: false,
-      body: {
-        code: route.query.code
-      }
-    }).then((res) => {
-      window.localStorage.setItem('refresh_token', res.refresh_token);
-      setLocalAccessToken(res.access_token)
-    })        
-  }  
 
 })

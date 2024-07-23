@@ -6,8 +6,10 @@
 
   import querystring from 'querystring';
   
-  let client_id = process.env.CLIENT_ID; 
-  let redirect_uri = process.env.REDIRECT_URI;
+  const config = useRuntimeConfig();
+  
+  let client_id = config.public.CLIENT_ID; 
+  let redirect_uri = config.public.REDIRECT_URI;
   
   const generateRandomString = length => {
       let text = '';

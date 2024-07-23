@@ -8,7 +8,7 @@
           <div class="md:w-8/12 px-5">
             <label class="text-white font-medium text-xl leading-tight block mb-2"> {{key + 1}}# {{ artist.name }} </label>
             <div class="flex flex-wrap gap-3">
-              <label v-for="(genre, index) in artist.genres" :key="index" class="text-slate-300 inline-block font-medium text-xs px-2 py-1 rounded-xl bg-green-700 uppercase"> 
+              <label v-for="(genre, index) in artist.genres" :key="index" class="text-slate-300 inline-block font-medium text-xs px-2 rounded-xl bg-green-700 uppercase"> 
                 {{ genre }} 
               </label>
             </div>
