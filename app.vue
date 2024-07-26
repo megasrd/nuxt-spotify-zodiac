@@ -22,11 +22,18 @@
     .page-leave-to {
       opacity: 0;
     }    
+    .display-grid-lg {
+      @apply grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 lg:gap-8 sm:gap-8 gap-4;
+    }
+    .display-grid-md {
+      @apply grid xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 grid-cols-2 gap-8;
+    }    
+    .display-grid-sm {
+      @apply grid lg:grid-cols-3 md:grid-cols-2 grid-cols-2 gap-8;
+    }        
 </style>
-<script>
-export default {
-  setup() {
-    
-  },
-}
+<script setup>
+useSeoMeta({
+  title: 'Your Spotify Profile'
+})
 </script>

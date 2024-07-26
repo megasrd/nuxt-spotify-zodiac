@@ -4,9 +4,9 @@ export const useSpotifyStore = defineStore('spotifyStore', {
       user_info: {},
       recently_played: {},
       top_artists: {},
-      top_artists_short: {},
+      favourite_artists: {},
       top_tracks: {},
-      top_tracks_short: {}
+      favourite_tracks: {}
     }),
     getters: {
       headers(state) {
@@ -36,17 +36,17 @@ export const useSpotifyStore = defineStore('spotifyStore', {
         })
         this.recently_played = recently_played;
       },
-      async getTopTracksShort() {
-        const top_tracks_short = await $fetch('https://api.spotify.com/v1/me/top/tracks?limit=12&time_range=short_term', {
+      async getFavouriteTracks() {
+        const favourite_tracks = await $fetch('https://api.spotify.com/v1/me/top/tracks?limit=6&time_range=long_term', {
           headers: this.headers
         })
-        this.top_tracks_short = top_tracks_short;
+        this.favourite_tracks = favourite_tracks;
       },
-      async getTopArtistsShort() {
-        const top_artists_short = await $fetch('https://api.spotify.com/v1/me/top/artists?limit=12&time_range=short_term', {
+      async getFavouriteArtists() {
+        const favourite_artists = await $fetch('https://api.spotify.com/v1/me/top/artists?limit=6&time_range=long_term', {
           headers: this.headers
         })
-        this.top_artists_short = top_artists_short;
+        this.favourite_artists = favourite_artists;
       },
       async getTopArtists() {
         const top_artists = await $fetch('https://api.spotify.com/v1/me/top/artists?limit=10', {

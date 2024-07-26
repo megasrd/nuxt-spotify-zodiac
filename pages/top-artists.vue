@@ -2,18 +2,20 @@
   <div>
     <h2 class="text-5xl font-bold"> Top Artists </h2>
     <div class="mt-12">
-      <div class="grid grid-cols-3 gap-4">
-        <div class="flex flex-wrap px-4 py-3 rounded hover:bg-slate-800 cursor-pointer w-full" v-for="(artist, key) in top_artists.items" :key="key">
-          <img class="md:w-4/12 h-40 object-cover" :src="artist.images[1].url" />
+      <div class="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
+        <NuxtLink :to="`/artist/${artist.id}`"  class="group flex flex-wrap px-4 py-3 rounded hover:bg-slate-800 cursor-pointer w-full" v-for="(artist, key) in top_artists.items" :key="key">
+          <div class="md:w-4/12">
+            <SpotifyImage :to="`/artist/${artist.id}`" :image-src="artist.images[1].url" />
+          </div>          
           <div class="md:w-8/12 px-5">
-            <label class="text-white font-medium text-xl leading-tight block mb-2"> {{key + 1}}# {{ artist.name }} </label>
-            <div class="flex flex-wrap gap-3">
-              <label v-for="(genre, index) in artist.genres" :key="index" class="text-slate-300 inline-block font-medium text-xs px-2 rounded-xl bg-green-700 uppercase"> 
-                {{ genre }} 
-              </label>
-            </div>
+            <span class="text-white font-medium text-xl leading-tight block mb-5"> {{key + 1}}# {{ artist.name }} </span>
+            <span class="text-slate-300 font-medium text-sm leading-tight block mb-2"> Followers: {{ artist.followers.total.toLocaleString() }} </span>
+            <span class="text-slate-300 font-medium text-sm leading-tight block"> Popularity: {{ artist.popularity }}% </span>            
+            <SpotifyButton :to="`/artist/${artist.id}`" class="mt-5">
+              View Artist
+            </SpotifyButton>
           </div>
-        </div>
+        </NuxtLink>
       </div>
     </div>      
   </div>
@@ -27,15 +29,10 @@
 
   const spotify_store = useSpotifyStore();
 
-  let isLoaded = ref(false);
-  let top_artists;
+  const top_artists = await $fetch(`https://api.spotify.com/v1/me/top/artists?limit=12`, {
+    headers: spotify_store.headers
+  });  
 
-  if (process.client) {        
-      if (localStorage.getItem("access_token")) {
-        await spotify_store.getTopArtists()
-        top_artists = spotify_store.top_artists;    
-        console.log(top_artists)
-        isLoaded = true;      
-      }      
-    }
+  console.log(top_artists)
+
 </script>
