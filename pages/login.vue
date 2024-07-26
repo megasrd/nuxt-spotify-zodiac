@@ -1,5 +1,7 @@
 <template>
-  <div> </div>
+  <div> 
+    <Loader> </Loader>
+  </div>
 </template>
 
 <script setup>  

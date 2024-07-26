@@ -1,7 +1,6 @@
 <template>
   <div class="my-12">    
-    <template v-if="isLoaded">
-      <ProfileInfo :user="user" />
+    <ProfileInfo :user="user" />
       <div class="lg:grid lg:grid-cols-2 gap-12 justify-center md:mt-24 mt-12 md:px-12">
         <div class="md:py-0 pt-4 pb-3">
           <div class="flex items-center justify-between md:px-0 px-6 mb-5">
@@ -30,10 +29,6 @@
           </div>
         </div>              
       </div>
-    </template>
-    <template v-else>
-      <Loader />
-    </template>
   </div>
 </template>
 
@@ -45,24 +40,23 @@
 
   const spotify_store = useSpotifyStore();
 
-  let isLoaded = ref(false);
   let user, favourite_artists, favourite_tracks;
-
-  if (process.client) {    
-    
-      
-      if (localStorage.getItem("access_token")) {
-
-        await spotify_store.getUser();
-        await spotify_store.getFavouriteArtists()
-        await spotify_store.getFavouriteTracks();
-
-        user = spotify_store.user_info;
-        favourite_artists = spotify_store.favourite_artists;    
-        favourite_tracks = spotify_store.favourite_tracks;
-
-        isLoaded = true;      
-
-      }      
-    }
+  const { data, pending, error } = await useAsyncData('dashboard', async () => {
+    const [_user, _favourite_artists, _favourite_tracks] = await Promise.all([
+      await $fetch('https://api.spotify.com/v1/me', {
+        headers: spotify_store.headers
+      }),
+      await $fetch('https://api.spotify.com/v1/me/top/artists?limit=6&time_range=long_term', {
+        headers: spotify_store.headers
+      }),
+      await $fetch('https://api.spotify.com/v1/me/top/tracks?limit=6&time_range=long_term', {
+        headers: spotify_store.headers
+      })        
+    ])
+    user = _user;
+    console.log(_user);
+    favourite_artists = _favourite_artists
+    favourite_tracks = _favourite_tracks
+  })
+  
 </script>

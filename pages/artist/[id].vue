@@ -44,18 +44,23 @@
     info: {},
     albums: {},
     topTracks: {}
-  }
+  }  
 
-  artist.info = await $fetch(`https://api.spotify.com/v1/artists/${artistID}`, {
-    headers: spotify_store.headers
-  });
-
-  artist.albums = await $fetch(`https://api.spotify.com/v1/artists/${artistID}/albums`, {
-    headers: spotify_store.headers
-  });  
-
-  artist.topTracks = await $fetch(`https://api.spotify.com/v1/artists/${artistID}/top-tracks`, {
-    headers: spotify_store.headers
-  });    
+  const { data, pending, error } = await useAsyncData('dashboard', async () => {
+    const [_info, _albums, _topTracks] = await Promise.all([
+      await $fetch(`https://api.spotify.com/v1/artists/${artistID}`, {
+        headers: spotify_store.headers
+      }),
+      await $fetch(`https://api.spotify.com/v1/artists/${artistID}/albums`, {
+        headers: spotify_store.headers
+      }),
+      await $fetch(`https://api.spotify.com/v1/artists/${artistID}/top-tracks`, {
+        headers: spotify_store.headers
+      })        
+    ])
+    artist.info = _info;
+    artist.albums = _albums
+    artist.topTracks = _topTracks
+  })  
 
 </script>

@@ -39,14 +39,4 @@
     headers: spotify_store.headers
   });  
 
-  console.log(recent)
-
 </script>
-
-<style lang="scss" scoped>
-  .track-grid {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 0.05fr 1fr 1fr 0.1fr;
-  }
-</style>

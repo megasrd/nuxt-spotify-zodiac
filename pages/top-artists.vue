@@ -33,6 +33,4 @@
     headers: spotify_store.headers
   });  
 
-  console.log(top_artists)
-
 </script>

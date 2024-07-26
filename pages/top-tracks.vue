@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div v-if="isLoaded">
+    <div>
       <h2 class="text-5xl font-bold"> Top Tracks </h2>
       <div class="mt-12">
         <TrackRowLabels />    
@@ -18,10 +17,6 @@
         </template>           
       </div>
     </div>
-    <div v-else>
-      <Loader />
-    </div>
-  </div>  
 </template>
 
 <script setup>
@@ -29,35 +24,9 @@
     layout: 'spotify'
   });
 
-  const unixToMinutes = (timestamp) => {
-    let m = new Date(timestamp).getMinutes()
-    let s = new Date(timestamp).getSeconds()
-    m = (m<10) ? '0' + m : m;
-    s = (s<10) ? '0' + s : s;
-
-    return `${m}:${s}`;
-  }
-
   const spotify_store = useSpotifyStore();
 
-  let isLoaded = ref(false);
-  let top_tracks;
-
-  if (process.client) {        
-      if (localStorage.getItem("access_token")) {
-        await spotify_store.getTopTracks()
-        top_tracks = spotify_store.top_tracks;    
-        isLoaded = true;      
-      }      
-    }  
+  const top_tracks = await $fetch(`https://api.spotify.com/v1/me/top/tracks?limit=20`, {
+    headers: spotify_store.headers
+  }); 
 </script>
-
-<style lang="scss" scoped>
-  .track-grid {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 0.05fr 1fr 1fr 0.1fr;
-    grid-gap: 12px;
-    margin-bottom: 32px;
-  }
-</style>
