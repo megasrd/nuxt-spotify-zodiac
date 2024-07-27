@@ -54,7 +54,6 @@
       })        
     ])
     user = _user;
-    console.log(user)
     favourite_artists = _favourite_artists
     favourite_tracks = _favourite_tracks
   })
