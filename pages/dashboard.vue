@@ -10,7 +10,7 @@
             </SpotifyButton>
           </div>          
           <div class="md:grid md:grid-cols-3 grid-cols-1 flex flex-nowrap w-full md:overflow-x-visible overflow-x-scroll">
-            <div class="px-4 py-3 lg:w-full md:w-40 w-32 flex-grow flex-shrink-0" v-for="(artist, key) in favourite_artists.items" :key="key">
+            <div class="md:px-4 px-2 py-3 lg:w-full md:w-40 flex-grow flex-shrink-0" v-for="(artist, key) in favourite_artists.items" :key="key">
               <SpotifyImage :to="`/artist/${artist.id}`" :image-src="artist.images[1].url" :heading="artist.name" />
             </div>
           </div>
@@ -23,7 +23,7 @@
             </SpotifyButton>
           </div> 
           <div class="md:grid md:grid-cols-3 grid-cols-1 flex flex-nowrap w-full md:overflow-x-visible overflow-x-scroll">
-            <div class="px-4 py-3 lg:w-full md:w-40 w-32 flex-grow flex-shrink-0" v-for="(track, key) in favourite_tracks.items" :key="key">
+            <div class="md:px-4 px-2 py-3 lg:w-full md:w-40 flex-grow flex-shrink-0" v-for="(track, key) in favourite_tracks.items" :key="key">
               <SpotifyImage :to="`/track/${track.id}`" :image-src="track.album.images[1].url" :heading="track.name" :description="track.artists[0].name" />
             </div>
           </div>
@@ -54,7 +54,7 @@
       })        
     ])
     user = _user;
-    console.log(_user);
+    console.log(user)
     favourite_artists = _favourite_artists
     favourite_tracks = _favourite_tracks
   })

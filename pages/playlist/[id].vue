@@ -5,7 +5,7 @@
       <h2 class="text-center font-bold text-xl text-white mt-5"> {{ playlist.name }} </h2>
       <h4 class="text-center font-semibold text-sm text-slate-300 mt-2"> By {{ playlist.owner.display_name }} </h4>
     </div>
-    <div class="lg:w-8/12 md:w-9/12 w-full">
+    <div class="lg:w-8/12 md:w-9/12 w-full md:mt-0 mt-12">
       <TrackRowLabels />    
       <template v-for="(item, key) in playlist.tracks.items" :key="key">
         <TrackRow 

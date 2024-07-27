@@ -5,16 +5,16 @@
         <div>
           {{ props.keyIndex + 1 }}
         </div>
-        <div>
-          <div class="flex flex-wrap items-center gap-3">
-            <img :src="props.image" class="xl:w-18 md:w-10 rounded-lg" />
+        <div class="overflow-hidden">
+          <div class="flex md:flex-wrap items-center gap-3">
+            <img :src="props.image" class="xl:w-18 md:w-10 w-8 rounded-lg" />
             <div>
-              <label class="xl:text-base text-sm font-semibold text-white truncate"> {{ truncateText(props.trackTitle) }} </label>
+              <label class="truncate xl:text-base text-sm font-semibold text-white"> {{ truncateText(props.trackTitle) }} </label>
               <span class="block">
                 <span class="inline-block bg-gray-500 text-xs font-bold w-5 mr-3 text-center" v-if="props.explicit">
                   E
                 </span>
-                <label class="inline-block cursor-pointer hover:underline text-xs text-slate-400 mr-3" v-for="artist in props.artists" :key="artist.name">
+                <label class="truncate inline-block cursor-pointer hover:underline text-xs text-slate-400 mr-3" v-for="artist in props.artists" :key="artist.name">
                   <NuxtLink :to="`/artist/${artist.id}`"> 
                     {{ artist.name }}
                   </NuxtLink>
@@ -23,12 +23,12 @@
             </div>
           </div>
         </div>
-        <div>  
-          <label class="xl:text-sm text-xs text-slate-300">
+        <div class="overflow-hidden">
+          <label class="truncate xl:text-sm text-xs text-slate-300">
             {{ props.albumTitle }}
           </label>
         </div>
-        <div>       
+        <div class="md:block hidden">       
           <label class="text-sm text-slate-300">
             {{ unixToMinutes(props.trackDuration) }}
           </label>
@@ -87,7 +87,12 @@
   .track-grid {
     display: grid;
     align-items: center;
-    grid-template-columns: 0.05fr 1fr 1fr 0.1fr;
+    grid-template-columns: 0.1fr 1fr 1fr;
     gap: 12px;
+  }
+  @media (min-width: 768px) {
+    .track-grid {
+      grid-template-columns: 0.05fr 1fr 1fr 0.1fr;
+    }
   }
 </style>

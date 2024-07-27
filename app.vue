@@ -1,9 +1,11 @@
 <template>
   <div>
-    <NuxtLoadingIndicator />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <ClientOnly>
+      <NuxtLoadingIndicator />
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </ClientOnly>
   </div>
 </template>
 <style lang="scss">
