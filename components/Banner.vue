@@ -4,8 +4,8 @@
       <div class="xl:flex xl:flex-wrap xl:items-end xl:content-center xl:gap-6 h-full">
         <img class="xl:w-60 xl:h-60 w-32 h-32 object-cover object-center rounded-2xl shadow" :src="props.image" />
         <div class="xl:mt-0 mt-6">
-          <h2 class="lg:text-4xl md:text-2xl text-xl text-white font-bold"> {{ props.heading }} </h2>      
-          <h2 v-for="item in descriptions" :key="item" class="md:text-lg text-base text-white font-semibold mt-4"> 
+          <h2 class="lg:text-4xl md:text-2xl text-xl text-white font-bold mb-3"> {{ props.heading }} </h2>      
+          <h2 v-for="item in descriptions" :key="item" class="md:text-lg text-base text-slate-200 font-semibold mt-1"> 
             {{ item }} 
           </h2>      
           <slot>
