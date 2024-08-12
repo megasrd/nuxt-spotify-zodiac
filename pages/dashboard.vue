@@ -14,7 +14,7 @@
               </SpotifyButton>
             </div>          
             <div class="md:grid md:grid-cols-3 grid-cols-1 flex flex-nowrap w-full md:overflow-x-visible overflow-x-scroll">
-              <div class="md:px-4 px-2 py-3 lg:w-full md:w-40" v-for="(artist, key) in favourite_artists.items" :key="key">
+              <div class="md:px-4 px-2 py-3 lg:w-full md:w-40 flex-grow flex-shrink-0" v-for="(artist, key) in favourite_artists.items" :key="key">
                 <SpotifyImage :to="`/artist/${artist.id}`" :image-src="artist.images[1].url" :heading="artist.name" />
               </div>
             </div>
