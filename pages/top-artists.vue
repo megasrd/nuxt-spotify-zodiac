@@ -12,7 +12,7 @@
               <SpotifyImage :to="`/artist/${artist.id}`" :image-src="artist.images[1].url" />
             </div>          
             <div class="md:w-8/12 md:px-5 pl-6 w-7/12">
-              <span class="text-white font-bold text-xl leading-tight block md:mb-5 mb-3"> {{key + 1}}# {{ artist.name }} </span>
+              <span class="text-white font-bold text-2xl leading-tight block md:mb-5 mb-3"> {{key + 1}}# {{ artist.name }} </span>
               <span class="text-slate-300 font-medium text-sm leading-tight block mb-2"> Followers: {{ artist.followers.total.toLocaleString() }} </span>
               <span class="text-slate-300 font-medium text-sm leading-tight block"> Popularity: {{ artist.popularity }}% </span>            
               <SpotifyButton :to="`/artist/${artist.id}`" class="mt-5">

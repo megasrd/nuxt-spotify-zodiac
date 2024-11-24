@@ -7,14 +7,14 @@
         </div>
         <div class="overflow-hidden">
           <div class="flex md:flex-wrap items-center gap-3">
-            <img :src="props.image" class="xl:w-18 md:w-10 w-8 rounded-lg" />
+            <img v-if="props.image" :src="props.image" class="xl:w-18 md:w-10 w-8 rounded-lg" />
             <div>
-              <label class="truncate xl:text-base text-sm font-semibold text-white"> {{ truncateText(props.trackTitle) }} </label>
-              <span class="block">
+              <label class="xl:text-base text-sm font-semibold text-white"> {{ truncateText(props.trackTitle) }} </label>
+              <span class="block truncate">
                 <span class="inline-block bg-gray-500 text-xs font-bold w-5 mr-3 text-center" v-if="props.explicit">
                   E
                 </span>
-                <label class="truncate inline-block cursor-pointer hover:underline text-xs text-slate-400 mr-3" v-for="artist in props.artists" :key="artist.name">
+                <label class="truncate inline-block cursor-pointer hover:underline text-xs text-slate-400 mr-3 last:mx-0" v-for="artist in props.artists" :key="artist.name">
                   <NuxtLink :to="`/artist/${artist.id}`"> 
                     {{ artist.name }}
                   </NuxtLink>
