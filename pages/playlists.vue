@@ -7,9 +7,9 @@
       <h2 class="text-5xl font-bold"> Playlists </h2>
       <div class="mt-12">
         <div class="display-grid-lg mt-4">
-          <div v-for="(album, index) in playlists.items" :key="index">
-            <SpotifyImage :to="`/playlist/${album.id}`" :image-src="album.images[0].url" :heading="album.name" :description="`Tracks: ${album.tracks.total}`" />
-          </div>
+          <template v-for="(album, index) in playlists.items" :key="index">
+            <SpotifyImage v-if="album" :to="`/playlist/${album.id}`" :image-src="album.images[0].url" :heading="album.name" :description="`Tracks: ${album.tracks.total}`" />
+          </template>
         </div>
       </div>       
     </div>           

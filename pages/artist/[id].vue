@@ -28,9 +28,9 @@
         </div>      
         <h3 class="text-2xl font-bold text-white mt-8 mb-4"> Albums </h3>
         <div class="display-grid-md mt-4">
-          <div v-for="(album, index) in artist.albums.items" :key="index">
-            <SpotifyImage :to="`/album/${album.id}`" :image-src="album.images[1].url" :heading="album.name" :description="album.release_date" />
-          </div>
+          <template v-for="(album, index) in artist.albums.items" :key="index">
+            <SpotifyImage v-if="album" :to="`/album/${album.id}`" :image-src="album.images[1].url" :heading="album.name" :description="album.release_date" />
+          </template>
         </div>
       </div>
     </div>  
