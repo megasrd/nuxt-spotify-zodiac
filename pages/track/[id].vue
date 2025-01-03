@@ -21,11 +21,7 @@
               </NuxtLink>
             </template>
           </template>        
-        </div>
-        <h3 class="mt-16 md:text-2xl text-lg font-bold text-white text-left"> Audio Features </h3>
-        <div class="mt-8 flex flex-wrap gap-4">    
-          <canvas class="md:w-8/12 px-4" id="audio-features"></canvas>
-        </div>       
+        </div>             
       </div>
     </div>    
   </div>
@@ -54,7 +50,7 @@
   import { Chart } from 'chart.js/auto';
 
   onMounted(() => {
-
+    //console.log(track);
   });
 
 </script>
